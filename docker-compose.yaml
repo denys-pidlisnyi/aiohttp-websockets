@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  server:
+    build:
+      target: local
+    ports:
+      - 127.0.0.1:8000:8000
+      - 127.0.0.1:8001:8001
+    volumes:
+      - .:/opt/server/
