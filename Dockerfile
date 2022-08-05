@@ -37,4 +37,4 @@ FROM base as live
 
 COPY --chown=user:user . /opt/server/
 
-CMD ["gunicorn", "main:create_app()", "--bind", "0.0.,0.0", " --worker-class", "aiohttp.GunicornWebWorker", "--workers", "1", "--access-logfile", "-", "--error-logfile", "-"]
+CMD ["gunicorn", "main:create_app()", "--bind", "0.0.,0.0", "--worker-class", "aiohttp.GunicornWebWorker", "--workers", "1", "--access-logfile", "-", "--error-logfile", "-"]
