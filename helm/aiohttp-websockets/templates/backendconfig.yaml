@@ -1,0 +1,12 @@
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: {{ include "aiohttp-websockets.fullname" . }}-config
+  labels:
+    {{- include "aiohttp-websockets.labels" . | nindent 4 }}
+spec:
+#   sessionAffinity:
+#     affinityType: "CLIENT_IP"
+  timeoutSec: 300
+  connectionDraining:
+    drainingTimeoutSec: 600

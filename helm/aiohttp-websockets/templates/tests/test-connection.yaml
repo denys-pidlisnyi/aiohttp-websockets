@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "aiohttp-websockets.fullname" . }}-test-connection"
+  labels:
+    {{- include "aiohttp-websockets.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "aiohttp-websockets.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
