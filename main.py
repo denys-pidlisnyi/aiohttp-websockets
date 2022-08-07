@@ -1,9 +1,15 @@
+import socket
+
 import aiohttp
 from aiohttp import web
 
 
+host_name = socket.gethostname()
+host_ip = socket.gethostbyname(host_name)
+
+
 async def welcome(request):
-    return web.Response(text="Welcome!")
+    return web.Response(text=f"Welcome! hostname: {host_name}, ip: {host_ip}")
 
 
 async def websocket_handler(request):
@@ -17,7 +23,7 @@ async def websocket_handler(request):
                 await ws.send_str('goodbye')
                 await ws.close()
             else:
-                await ws.send_str(msg.data + '/answer')
+                await ws.send_str(msg.data + f'/answer hostname: {host_name}, ip: {host_ip}')
         elif msg.type == aiohttp.WSMsgType.ERROR:
             print('ws connection closed with exception %s' % ws.exception())
 
